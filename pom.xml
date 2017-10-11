@@ -38,6 +38,20 @@
             <artifactId>bootstrap</artifactId>
             <version>3.3.7</version>
         </dependency>
+
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- optional, it brings userful tags to display spring security stuff -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>
