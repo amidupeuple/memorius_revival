@@ -1,4 +1,4 @@
-package pesiykot.memorius.controller;
+package pesiykot.memorius.web.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

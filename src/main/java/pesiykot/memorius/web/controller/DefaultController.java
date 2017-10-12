@@ -1,12 +1,15 @@
-package pesiykot.memorius.controller;
+package pesiykot.memorius.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
-import pesiykot.memorius.dto.UserDto;
+import org.springframework.web.servlet.ModelAndView;
+import pesiykot.memorius.web.dto.UserDto;
+
+import javax.validation.Valid;
 
 @Controller
 public class DefaultController {
@@ -51,5 +54,13 @@ public class DefaultController {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "registration";
+    }
+
+    @PostMapping("/registration")
+    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto acountDto, BindingResult result, WebRequest request, Errors errors) {
+
+
+        System.out.println();
+        return null;
     }
 }

@@ -1,9 +1,12 @@
-package pesiykot.memorius.dto;
+package pesiykot.memorius.web.dto;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import pesiykot.memorius.validation.PasswordMatches;
+import pesiykot.memorius.validation.ValidEmail;
 
 import javax.validation.constraints.NotNull;
 
+@PasswordMatches
 public class UserDto {
     @NotNull
     @NotEmpty
@@ -19,6 +22,7 @@ public class UserDto {
 
     private String matchingPassword;
 
+    @ValidEmail
     @NotNull
     @NotEmpty
     private String email;
