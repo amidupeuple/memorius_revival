@@ -1,0 +1,1 @@
+INSERT INTO user_account (first_name, last_name, email, password) VALUES ('John', 'Smith', 'abc@abc.com', 'qwerty123');
