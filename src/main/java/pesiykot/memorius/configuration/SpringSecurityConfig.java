@@ -18,9 +18,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // custom 403 access denied handler
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable()
+        httpSecurity.headers()
+                .frameOptions().disable().and()
+                .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/home", "/about", "/registration").permitAll()
+                    .antMatchers("/", "/home", "/about", "/registration", "/h2/**").permitAll()
                     .antMatchers("/admin/**").hasAnyRole("ADMIN")
                     .antMatchers("/user/**").hasAnyRole("USER")
                     .anyRequest().authenticated()
