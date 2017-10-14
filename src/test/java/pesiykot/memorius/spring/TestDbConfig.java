@@ -18,7 +18,8 @@ public class TestDbConfig extends PersistenceJPAConfig {
 
     @Override
     public DataSource dataSource() {
-        EmbeddedDatabase datasource = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
+        EmbeddedDatabase datasource = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("schema.sql")
+                .addScript("data.sql").build();
         return datasource;
     }
 

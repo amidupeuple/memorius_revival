@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import pesiykot.memorius.persistence.dao.DumpService;
 import pesiykot.memorius.persistence.dao.UserRepository;
 import pesiykot.memorius.persistence.model.User;
 import pesiykot.memorius.spring.TestDbConfig;
@@ -18,6 +19,9 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(classes = {TestDbConfig.class})
 @Transactional
 public class UserRepositoryTest {
+
+    @Autowired
+    private DumpService dumpService;
 
     private User newUser;
 
@@ -39,4 +43,11 @@ public class UserRepositoryTest {
         System.out.println("User Id: " + savedUser.getId());
         assertTrue(savedUser.getId() > 0);
     }
+
+    @Test
+    public  void makeDump() {
+        dumpService.createDump();
+        assertTrue(true);
+    }
+
 }
