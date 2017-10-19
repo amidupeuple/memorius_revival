@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Memorius | Home</title>
 
@@ -8,13 +9,17 @@
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<div sec:authorize="isAuthenticated()">
+    <div th:replace="fragments/header :: header_authenticated"/>
+</div>
+<div sec:authorize="isAnonymous()">
+    <div th:replace="fragments/header :: header"/>
+</div>
 
 <div class="container">
 
     <div class="starter-template">
         <h1>Memorius</h1>
-        <h2>0. <a th:href="@{/registration}">Registration</a></h2>
         <h2>1. Visit <a th:href="@{/admin}">Admin page</a></h2>
         <h2>2. Visit <a th:href="@{/user}">User page</a></h2>
         <h2>3. Visit <a th:href="@{/about}">Normal page</a></h2>
