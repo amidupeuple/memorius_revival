@@ -6,4 +6,6 @@ import pesiykot.memorius.persistence.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User save(User user);
+
+    User findByEmail(String email);
 }

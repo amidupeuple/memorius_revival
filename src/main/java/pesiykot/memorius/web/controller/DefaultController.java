@@ -1,5 +1,6 @@
 package pesiykot.memorius.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -7,12 +8,18 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import pesiykot.memorius.persistence.model.User;
+import pesiykot.memorius.service.IUserService;
+import pesiykot.memorius.validation.EmailExistsException;
 import pesiykot.memorius.web.dto.UserDto;
 
 import javax.validation.Valid;
 
 @Controller
 public class DefaultController {
+
+    @Autowired
+    private IUserService userService;
 
     @GetMapping("/")
     public String home1() {
@@ -57,10 +64,33 @@ public class DefaultController {
     }
 
     @PostMapping("/registration")
-    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto acountDto, BindingResult result, WebRequest request, Errors errors) {
+    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto accountDto, BindingResult result, WebRequest request, Errors errors) {
+        User registered = new User();
+        if (!result.hasErrors()) {
+            registered = createUserAccount(accountDto, result);
+        }
 
+        if (registered == null) {
+            result.rejectValue("email", "message.regError");
+        }
 
-        System.out.println();
-        return null;
+        if (result.hasErrors()) {
+            return new ModelAndView("registration", "user", accountDto);
+        }
+        else {
+            return new ModelAndView("successRegister", "user", accountDto);
+        }
+    }
+
+    private User createUserAccount(UserDto accountDto, BindingResult result) {
+
+        User registered = null;
+        try {
+            registered = userService.registerNewAccount(accountDto);
+        } catch (EmailExistsException e) {
+            return null;
+        }
+
+        return registered;
     }
 }

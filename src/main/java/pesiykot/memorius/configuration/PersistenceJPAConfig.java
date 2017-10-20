@@ -18,9 +18,12 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.util.Locale;
 import java.util.Properties;
 
 
@@ -96,4 +99,5 @@ public class PersistenceJPAConfig {
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         return properties;
     }
+
 }
