@@ -1,5 +1,7 @@
 package pesiykot.memorius.web.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import javax.validation.Valid;
 
 @Controller
 public class DefaultController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultController.class);
 
     @Autowired
     private IUserService userService;
@@ -67,7 +71,7 @@ public class DefaultController {
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto accountDto, BindingResult result, WebRequest request, Errors errors) {
         User registered = new User();
         if (!result.hasErrors()) {
-            registered = createUserAccount(accountDto, result);
+            registered = createUserAccount(accountDto);
         }
 
         if (registered == null) {
@@ -82,12 +86,13 @@ public class DefaultController {
         }
     }
 
-    private User createUserAccount(UserDto accountDto, BindingResult result) {
-
+    private User createUserAccount(UserDto accountDto) {
         User registered = null;
+
         try {
             registered = userService.registerNewAccount(accountDto);
         } catch (EmailExistsException e) {
+            LOG.error(e.getMessage());
             return null;
         }
 
