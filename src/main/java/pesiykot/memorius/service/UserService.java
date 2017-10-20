@@ -2,12 +2,15 @@ package pesiykot.memorius.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pesiykot.memorius.persistence.dao.RoleRepository;
 import pesiykot.memorius.persistence.dao.UserRepository;
+import pesiykot.memorius.persistence.model.Role;
 import pesiykot.memorius.persistence.model.User;
 import pesiykot.memorius.validation.EmailExistsException;
 import pesiykot.memorius.web.dto.UserDto;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 
 /**
  * Created by danya_000 on 10/15/2017.
@@ -17,6 +20,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Transactional
     @Override
@@ -31,6 +37,11 @@ public class UserService implements IUserService {
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
 
+        Role roleUser = roleRepository.findByName("ROLE_USER");
+        user.setRoles(Arrays.asList(roleUser));
+        roleUser.getUsers().add(user);
+
+        roleRepository.save(roleUser);
         return userRepository.save(user);
     }
 
