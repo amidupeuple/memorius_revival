@@ -45,7 +45,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select user_name, password, 'true' as enabled from user_account where user_name=? limit 1")
-                .authoritiesByUsernameQuery("select u.user_name, r.name from users_roles as ur inner join user_account as u on u.id = ur.user_id inner join role as r on ur.role_id = r.id where u.user_name=?");
+                .usersByUsernameQuery("select email, password, 'true' as enabled from user_account where email=? limit 1")
+                .authoritiesByUsernameQuery("select u.email, r.name from users_roles as ur inner join user_account as u on u.id = ur.user_id inner join role as r on ur.role_id = r.id where u.email=?");
     }
 }

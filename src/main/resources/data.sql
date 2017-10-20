@@ -1,5 +1,5 @@
-INSERT INTO user_account (user_name, first_name, last_name, email, password) VALUES ('crazyk', 'John', 'Smith', 'abc@abc.com', 'qwerty123');
-INSERT INTO user_account (user_name, first_name, last_name, email, password) VALUES ('jimbo', 'Karl', 'Jackson', 'asd@abc.com', 'qqq111');
+INSERT INTO user_account (first_name, last_name, email, password) VALUES ('John', 'Smith', 'abc@abc.com', 'qwerty123');
+INSERT INTO user_account (first_name, last_name, email, password) VALUES ('Karl', 'Jackson', 'asd@abc.com', 'qqq111');
 
 INSERT INTO role (name) VALUES ('ROLE_ADMIN');
 INSERT INTO role (name) VALUES ('ROLE_USER');
