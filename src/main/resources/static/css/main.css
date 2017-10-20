@@ -1,7 +1,11 @@
 h1{
-    color:#0000FF;
+    color:#777;
 }
 
 h2{
-    color:#FF0000;
+    color:black;
+}
+
+.link-color{
+    color:#777;
 }
